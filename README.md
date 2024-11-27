@@ -13,12 +13,11 @@ This library has been **depreciated** in the favour of [another one](https://ava
 
 ## Installation
 
-Install `availity-reactstrap-validation` and `reactstrap` via NPM
+Install `@baraaist/availity-reactstrap-validation` and `reactstrap` via NPM
 
 ```sh
-npm install --save availity-reactstrap-validation reactstrap
+npm install --save @baraaist/availity-reactstrap-validation reactstrap
 ```
-
 If applicable, install a `Promise` polyfill.  For example:
 
 ```sh
@@ -30,7 +29,7 @@ The polyfill can be applied into your web application by using tools like Webpac
 Import the components you need, example:
 
 ```js
-import { AvField } from 'availity-reactstrap-validation';
+import { AvField } from '@baraaist/availity-reactstrap-validation';
 ```
 
 ## Development
