@@ -3,6 +3,8 @@
 # availity-reactstrap-validation
 
 Easy to use React validation components compatible for reactstrap.
+## Important Update
+This library has been updated to work with react 18
 
 ## Important Update - 4th January, 2021
 

@@ -1,5 +1,5 @@
 {
-  "name": "availity-reactstrap-validation",
+  "name": "@baraaist/availity-reactstrap-validation",
   "version": "2.7.1",
   "author": "Evan Sharp <evan.sharp@availity.com>",
   "description": "Form validation helpers for reactstrap",
