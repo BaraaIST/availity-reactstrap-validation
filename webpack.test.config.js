@@ -1,32 +1,37 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-var webpackConfig = {
+const webpackConfig = {
   target: 'node',
   context: path.join(__dirname, './src'),
-  devtool: '#cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
-    'availity-reactstrap-validation': ['./index.js']
+    'availity-reactstrap-validation': ['./index.js'],
   },
   node: {
     fs: 'empty',
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    }),
   ],
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.(json)$/,
-        loaders: [
-          'json-loader?cacheDirectory',
-        ],
+        test: /\.json$/,
+        type: 'json',  // Webpack 5 supports JSON natively
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: [
-          'babel-loader?cacheDirectory',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
+          },
         ],
       },
     ],
@@ -35,7 +40,7 @@ var webpackConfig = {
     alias: {
       'availity-reactstrap-validation': path.resolve('./src'),
     },
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
   },
   externals: {
     'react/lib/ExecutionEnvironment': true,

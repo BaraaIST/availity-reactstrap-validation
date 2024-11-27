@@ -49,6 +49,8 @@ export default class FormPage extends React.Component {
         <Helmet title="Validators" />
         <h3>Validations</h3>
         <hr />
+        
+        {/* Custom error messages */}
         <h4>Custom error messages</h4>
         <div className="docs-example">
           <ValidationCustomMessageExample />
@@ -59,6 +61,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Date validation */}
         <h4>Date</h4>
         <div className="docs-example">
           <ValidationDateExample />
@@ -69,6 +72,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* DateRange validation */}
         <h4>DateRange</h4>
         <div className="docs-example">
           <ValidationDateRangeExample />
@@ -79,6 +83,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* DateTime validation */}
         <h4>DateTime</h4>
         <div className="docs-example">
           <ValidationDateTimeExample />
@@ -89,6 +94,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Email validation */}
         <h4>Email</h4>
         <div className="docs-example">
           <ValidationEmailExample />
@@ -99,6 +105,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Match validation */}
         <h4>Match</h4>
         <div className="docs-example">
           <ValidationMatchExample />
@@ -109,6 +116,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Max validation */}
         <h4>Max</h4>
         <div className="docs-example">
           <ValidationMaxExample />
@@ -119,6 +127,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* MaxLength validation */}
         <h4>MaxLength</h4>
         <div className="docs-example">
           <ValidationMaxLengthExample />
@@ -129,6 +138,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* MaxChecked validation */}
         <h4>MaxChecked</h4>
         <div className="docs-example">
           <ValidationMaxCheckedExample />
@@ -139,6 +149,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Min validation */}
         <h4>Min</h4>
         <div className="docs-example">
           <ValidationMinExample />
@@ -149,6 +160,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* MinLength validation */}
         <h4>MinLength</h4>
         <div className="docs-example">
           <ValidationMinLengthExample />
@@ -159,6 +171,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* MinChecked validation */}
         <h4>MinChecked</h4>
         <div className="docs-example">
           <ValidationMinCheckedExample />
@@ -169,6 +182,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Npi validation */}
         <h4>Npi</h4>
         <div className="docs-example">
           <ValidationNpiExample />
@@ -179,6 +193,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Number validation */}
         <h4>Number</h4>
         <div className="docs-example">
           <ValidationNumberExample />
@@ -189,6 +204,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Pattern validation */}
         <h4>Pattern</h4>
         <div className="docs-example">
           <ValidationPatternExample />
@@ -199,6 +215,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Phone validation */}
         <h4>Phone</h4>
         <p>Note: Validates against NANP</p>
         <div className="docs-example">
@@ -210,6 +227,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Required validation */}
         <h4>Required</h4>
         <div className="docs-example">
           <ValidationRequiredExample />
@@ -220,6 +238,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Step validation */}
         <h4>Step</h4>
         <p>Note: Only works only with input type of numbers</p>
         <div className="docs-example">
@@ -231,6 +250,7 @@ export default class FormPage extends React.Component {
           </PrismCode>
         </pre>
 
+        {/* Custom / Async validation */}
         <h4>Custom / Async</h4>
         <div className="docs-example">
           <ValidationAsyncExample />

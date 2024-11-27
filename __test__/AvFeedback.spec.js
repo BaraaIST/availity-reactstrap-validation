@@ -1,43 +1,28 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import { AvFeedback } from 'availity-reactstrap-validation';
 import { FormFeedback } from 'reactstrap';
-
-const state = {};
-const options = {
-  context: {
-    FormCtrl: {},
-    Group: {
-      getInputState: () => state,
-    },
-  },
-};
+import '@testing-library/jest-dom';
 
 describe('AvFeedback', () => {
   describe('when there is an error', () => {
-    beforeEach(() => {
-      state.color = 'danger';
-    });
-
     it('should render with "FormFeedback"', () => {
-      const wrapper = shallow(<AvFeedback>Yo!</AvFeedback>, options);
-
-      expect(wrapper.type()).to.equal(FormFeedback);
+      const { container } = render(<AvFeedback>Yo!</AvFeedback>);
+      const feedbackComponent = container.querySelector('.invalid-feedback');
+      expect(feedbackComponent).toBeInTheDocument();
     });
 
     it('should render children inside the FormFeedback', () => {
-      const wrapper = shallow(<AvFeedback>Yo!</AvFeedback>, options);
-
-      expect(wrapper.prop('children')).to.equal('Yo!');
+      render(<AvFeedback>Yo!</AvFeedback>);
+      expect(screen.getByText('Yo!')).toBeInTheDocument();
     });
 
     it('should render with the props passed in', () => {
-      const wrapper = shallow(
-        <AvFeedback style={{ textAlign: 'center' }}>Yo!</AvFeedback>,
-        options
+      const { container } = render(
+        <AvFeedback style={{ textAlign: 'center' }}>Yo!</AvFeedback>
       );
-
-      expect(wrapper.prop('style').textAlign).to.equal('center');
+      const feedbackComponent = container.querySelector('.invalid-feedback');
+      expect(feedbackComponent).toHaveStyle({ textAlign: 'center' });
     });
   });
 });

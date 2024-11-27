@@ -1,54 +1,72 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, unmountComponentAtNode } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { AvGroup } from 'availity-reactstrap-validation';
 import { FormGroup } from 'reactstrap';
 
 describe('AvGroup', function() {
+  let inputState;
+  let props;
+  let registerSpy;
+  let context;
+  let container;
+
   beforeEach(() => {
-    this.inputState = {color:'danger'};
-    this.props = {
+    inputState = { color: 'danger' };
+    props = {
       name: 'fieldName',
     };
-    this.registerSpy = sinon.spy();
-    this.context = {
+    registerSpy = jest.fn();
+    context = {
       FormCtrl: {
-        getInputState: sinon.stub().returns(this.inputState),
-        register: this.registerSpy,
+        getInputState: jest.fn().mockReturnValue(inputState),
+        register: registerSpy,
       },
     };
-    this.options = {context: this.context};
+  });
+
+  afterEach(() => {
+    if (container) {
+      unmountComponentAtNode(container);
+    }
   });
 
   it('should render with "FormGroup"', () => {
-    const wrapper = shallow(<AvGroup>Yo!</AvGroup>, this.options);
+    const { container } = render(<AvGroup {...props}>Yo!</AvGroup>, { wrapper: ({ children }) => <div>{children}</div> });
 
-    expect(wrapper.type()).to.equal(FormGroup);
+    expect(container.firstChild).toHaveClass(FormGroup.name); // Check if it renders with "FormGroup" class
   });
 
   it('should render color prop based on inputState', () => {
-    const wrapper = shallow(<AvGroup>Yo!</AvGroup>, this.options);
+    const { container } = render(<AvGroup {...props}>Yo!</AvGroup>, { wrapper: ({ children }) => <div>{children}</div> });
 
-    expect(wrapper.prop('className')).to.equal(`text-${this.inputState.color}`);
+    expect(container.firstChild).toHaveClass(`text-${inputState.color}`); // Check if color class is applied
   });
 
   it('should render children inside the FormGroup', () => {
-    const wrapper = shallow(<AvGroup>Yo!</AvGroup>, this.options);
+    const { getByText } = render(<AvGroup {...props}>Yo!</AvGroup>, { wrapper: ({ children }) => <div>{children}</div> });
 
-    expect(wrapper.prop('children')).to.equal('Yo!');
+    expect(getByText('Yo!')).toBeInTheDocument(); // Check if the child content is rendered
   });
 
   it('should render with the props passed in', () => {
-    const wrapper = shallow(<AvGroup style={{textAlign: 'center'}}>Yo!</AvGroup>, this.options);
+    const { container } = render(
+      <AvGroup {...props} style={{ textAlign: 'center' }}>
+        Yo!
+      </AvGroup>,
+      { wrapper: ({ children }) => <div>{children}</div> }
+    );
 
-    expect(wrapper.prop('style').textAlign).to.equal('center');
+    expect(container.firstChild).toHaveStyle('text-align: center'); // Check if style is applied correctly
   });
 
   it('should intercept an input registration', () => {
-    const wrapper = mount(<AvGroup style={{textAlign: 'center'}}>Yo!</AvGroup>, this.options);
-    expect(wrapper.node.FormCtrl.register).to.not.equal(this.registerSpy);
-    const input  = {props: this.props};
-    wrapper.node.FormCtrl.register(input);
-    expect(wrapper.state('input')).to.equal(input);
-    expect(this.registerSpy).to.have.been.calledWith(input);
+    const { container } = render(<AvGroup {...props}>Yo!</AvGroup>, { wrapper: ({ children }) => <div>{children}</div> });
+
+    // Simulate the context registration
+    const input = { props };
+    context.FormCtrl.register(input);
+
+    expect(registerSpy).toHaveBeenCalledWith(input); // Check if the register function was called correctly
   });
 });

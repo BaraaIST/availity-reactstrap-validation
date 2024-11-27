@@ -22,16 +22,16 @@ export default class AvGroup extends Component {
   }
 
   getChildContext() {
-    this.FormCtrl = {...this.context.FormCtrl};
+    this.FormCtrl = { ...this.context.FormCtrl };
     const registerValidator = this.FormCtrl.register;
     this.FormCtrl.register = (input) => {
-      this.setState({input});
-      registerValidator(input, this.update.bind(this, input));
+      this.setState({ input });
+      registerValidator(input, this.update.bind(this, input)); // Bind manually
     };
     return {
       Group: {
         getInput: () => this.state.input,
-        getInputState: ::this.getInputState,
+        getInputState: this.getInputState.bind(this), // Bind manually
       },
       FormCtrl: this.FormCtrl,
     };

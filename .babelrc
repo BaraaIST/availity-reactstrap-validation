@@ -1,6 +1,13 @@
 {
-  "presets": ["es2015-loose", "stage-0", "react"],
-  "plugins": ["transform-runtime", "transform-proto-to-assign", "transform-class-properties"],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-private-methods"
+  ],
   "env": {
     "test": {
       "plugins": [

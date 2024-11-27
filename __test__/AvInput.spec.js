@@ -1,16 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { AvInput } from 'availity-reactstrap-validation';
 import { Input } from 'reactstrap';
 
 let options;
+let touched;
+let dirty;
+let bad;
+let error;
 
 describe('AvInput', () => {
-  let touched;
-  let dirty;
-  let bad;
-  let error;
-
   beforeEach(() => {
     touched = false;
     dirty = false;
@@ -20,21 +20,21 @@ describe('AvInput', () => {
       context: {
         FormCtrl: {
           inputs: {},
-          getDefaultValue: ()=> {},
-          getInputState: ()=> {},
+          getDefaultValue: jest.fn(),
+          getInputState: jest.fn(),
           hasError: () => error,
           isDirty: () => dirty,
           isTouched: () => touched,
           isBad: () => bad,
           isDisabled: () => false,
           isReadOnly: () => false,
-          setDirty: ()=> {},
-          setTouched: ()=> {},
-          setBad: ()=> {},
-          register: ()=> {},
-          unregister: ()=> {},
-          validate: ()=> {},
-          validationEvent: ()=> {},
+          setDirty: jest.fn(),
+          setTouched: jest.fn(),
+          setBad: jest.fn(),
+          register: jest.fn(),
+          unregister: jest.fn(),
+          validate: jest.fn(),
+          validationEvent: jest.fn(),
           parent: null,
         },
       },
@@ -42,78 +42,78 @@ describe('AvInput', () => {
   });
 
   it('should render a reactstrap Input', () => {
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.type()).to.equal(Input);
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
   it('should have "is-untouched" class when untouched', () => {
-    const wrapper = shallow(<AvInput name="yo" />, options);
-    expect(wrapper.hasClass('is-untouched')).to.be.true;
-    expect(wrapper.hasClass('is-touched')).to.be.false;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('is-untouched');
+    expect(input).not.toHaveClass('is-touched');
   });
 
   it('should have "is-pristine" class when not dirty', () => {
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('is-pristine')).to.be.true;
-    expect(wrapper.hasClass('is-dirty')).to.be.false;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('is-pristine');
+    expect(input).not.toHaveClass('is-dirty');
   });
 
   it('should have "av-valid" not "is-invalid" class when valid', () => {
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('av-valid')).to.be.true;
-    expect(wrapper.hasClass('is-invalid')).to.be.false;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('av-valid');
+    expect(input).not.toHaveClass('is-invalid');
   });
 
   it('should not have "is-bad-input" class when the input is not "bad"', () => {
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('is-bad-input')).to.be.false;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).not.toHaveClass('is-bad-input');
   });
 
   it('should have "is-touched" class when touched', () => {
     touched = true;
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('is-untouched')).to.be.false;
-    expect(wrapper.hasClass('is-touched')).to.be.true;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).not.toHaveClass('is-untouched');
+    expect(input).toHaveClass('is-touched');
   });
 
-  it('should have "is-pristine" class when not dirty', () => {
+  it('should have "is-dirty" class when dirty', () => {
     dirty = true;
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('is-pristine')).to.be.false;
-    expect(wrapper.hasClass('is-dirty')).to.be.true;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).not.toHaveClass('is-pristine');
+    expect(input).toHaveClass('is-dirty');
   });
 
-  it('should have "is-invalid" not "av-valid" class when invalid and touched', () => {
+  it('should have "is-invalid" class when invalid and touched', () => {
     error = true;
     touched = true;
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('av-valid')).to.be.false;
-    expect(wrapper.hasClass('is-invalid')).to.be.true;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).not.toHaveClass('av-valid');
+    expect(input).toHaveClass('is-invalid');
   });
 
-  it('should not have "is-bad-input" class when the input is not "bad"', () => {
+  it('should have "is-bad-input" class when the input is bad', () => {
     bad = true;
-    const wrapper = shallow(<AvInput name="yo" />, options);
-
-    expect(wrapper.hasClass('is-bad-input')).to.be.true;
+    render(<AvInput name="yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('is-bad-input');
   });
 
   it('should allow custom classes', () => {
-    const wrapper = shallow(<AvInput name="yo" className="yo-yo" />, options);
-
-    expect(wrapper.hasClass('yo-yo')).to.be.true;
+    render(<AvInput name="yo" className="yo-yo" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveClass('yo-yo');
   });
 
   it('should pass props through to reactstrap\'s Input', () => {
-    const wrapper = shallow(<AvInput name="yo" type="number" />, options);
-
-    expect(wrapper.prop('type')).to.equal('number');
+    render(<AvInput name="yo" type="number" />, { wrapper: ({ children }) => <div>{children}</div> });
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveAttribute('type', 'number');
   });
 });

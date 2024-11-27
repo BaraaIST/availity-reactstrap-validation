@@ -1,6 +1,7 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 import React from 'react';
-import { PrismCode } from 'react-prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'; // Use SyntaxHighlighter from react-syntax-highlighter
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/hljs'; // You can pick a theme that suits your needs
 import Helmet from 'react-helmet';
 
 import FormExample from '../examples/Form';
@@ -25,9 +26,9 @@ export default class FormPage extends React.Component {
           <FormExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {FormExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>OnSubmit</h4>
@@ -36,9 +37,9 @@ export default class FormPage extends React.Component {
           <FormOnSubmitExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {FormOnSubmitExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>OnValidSubmit</h4>
@@ -47,9 +48,9 @@ export default class FormPage extends React.Component {
           <FormOnValidSubmitExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {FormOnValidSubmitExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>OnInvalidSubmit</h4>
@@ -58,16 +59,16 @@ export default class FormPage extends React.Component {
           <FormOnInvalidSubmitExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {FormOnInvalidSubmitExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>Model (Easy default values)</h4>
         <p>
           Pass an object in which the keys correspond to the name props of the form's input to set their initial value.
           Nested objects can be accessed via dot notation. Individual array indexes can be accessed via bracket notation.
-          The values object returned to the various submissions handlers will reflex the object shape.
+          The values object returned to the various submissions handlers will reflect the object shape.
           Behind the scenes, lodash's <a href="https://lodash.com/docs#get">get</a> and <a href="https://lodash.com/docs#set">set</a> are being used,
           look at lodash's documentation to learn more about how to access complex data in the model.
         </p>
@@ -75,9 +76,9 @@ export default class FormPage extends React.Component {
           <FormModelExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {FormModelExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
       </div>
     );

@@ -1,6 +1,7 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 import React from 'react';
-import { PrismCode } from 'react-prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'; // Use SyntaxHighlighter from react-syntax-highlighter
+import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/hljs'; // You can pick a theme that suits your needs
 import Helmet from 'react-helmet';
 
 import CheckboxExample from '../examples/Checkbox';
@@ -21,16 +22,16 @@ export default class CheckboxPage extends React.Component {
         <p>
           Checkboxes are slightly special as the user cannot define a value, but only check and uncheck the box.
           There are special props, <code>trueValue</code> and <code>falseValue</code> which allow you to determine what
-          the value returned will be when the box is check or not checked respectfully. <code>trueValue</code> will
+          the value returned will be when the box is checked or not checked respectively. <code>trueValue</code> will
           default to <code>true</code> and <code>falseValue</code> will default to <code>false</code>.
         </p>
         <div className="docs-example">
           <CheckboxExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {CheckboxExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>True Value</h4>
@@ -42,9 +43,9 @@ export default class CheckboxPage extends React.Component {
           <CheckboxTrueValueExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {CheckboxTrueValueExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>False Value</h4>
@@ -56,9 +57,9 @@ export default class CheckboxPage extends React.Component {
           <CheckboxFalseValueExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {CheckboxFalseValueExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
 
         <h4>Model Default Values</h4>
@@ -70,9 +71,9 @@ export default class CheckboxPage extends React.Component {
           <CheckboxDefaultExample />
         </div>
         <pre>
-          <PrismCode className="language-jsx">
+          <SyntaxHighlighter language="jsx" style={solarizedlight}>
             {CheckboxDefaultExampleSource}
-          </PrismCode>
+          </SyntaxHighlighter>
         </pre>
       </div>
     );
