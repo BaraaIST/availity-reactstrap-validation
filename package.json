@@ -1,13 +1,13 @@
 {
   "name": "@baraaist/availity-reactstrap-validation",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "author": "Evan Sharp <evan.sharp@availity.com>",
   "description": "Form validation helpers for reactstrap",
   "main": "lib/index.js",
   "engines": {
     "node": ">= 5.0.0"
   },
-  "scripts": {
+  "scripts": {x
     "ci": "npm run lint && cross-env BABEL_ENV=test nyc mochapack",
     "report-coverage": "coveralls < ./__test__/coverage/lcov.info",
     "test:coverage": "cross-env BABEL_ENV=test nyc mochapack && npm run cleanup",
