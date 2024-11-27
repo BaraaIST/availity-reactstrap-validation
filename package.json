@@ -7,7 +7,7 @@
   "engines": {
     "node": ">= 5.0.0"
   },
-  "scripts": {x
+  "scripts": {
     "ci": "npm run lint && cross-env BABEL_ENV=test nyc mochapack",
     "report-coverage": "coveralls < ./__test__/coverage/lcov.info",
     "test:coverage": "cross-env BABEL_ENV=test nyc mochapack && npm run cleanup",
